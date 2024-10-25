@@ -1,6 +1,6 @@
 ﻿namespace DeliveriApp.Domein.Entities
 {
-    class RegionOrder : BaseProperties
+    public class RegionOrder : BaseProperties
     {
 
         public Guid RegionId { get; set; }

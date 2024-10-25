@@ -1,6 +1,6 @@
 ﻿namespace DeliveriApp.Domein.Entities
 {
-    class Order : BaseProperties
+    public class Order : BaseProperties
     {
         IEnumerable<RegionOrder> RegionOrder { get; set; }
     }

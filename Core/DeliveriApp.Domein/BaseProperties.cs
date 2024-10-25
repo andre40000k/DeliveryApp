@@ -1,6 +1,6 @@
 ﻿namespace DeliveriApp.Domein
 {
-    abstract class BaseProperties
+    public abstract class BaseProperties
     {
         Guid Id { get; set; }
     }
