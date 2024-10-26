@@ -8,7 +8,11 @@ namespace DeliveriApp.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<City> builder)
         {
-            throw new NotImplementedException();
+            builder.HasKey(k => k.Id);
+            builder.Property(p => p.Id).ValueGeneratedOnAdd();
+            builder.Property(p=> p.CityName).IsRequired().HasMaxLength(100);
+
+            builder.ToTable(nameof(City));
         }
     }
 }

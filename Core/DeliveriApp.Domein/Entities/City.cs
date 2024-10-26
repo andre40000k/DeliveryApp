@@ -2,6 +2,7 @@
 {
     public class City : BaseProperties
     {
-        public IEnumerable<Region> RegionList { get; set; }
+        public string CityName { get; set; }
+        public IEnumerable<Region> Regions { get; set; }
     }
 }

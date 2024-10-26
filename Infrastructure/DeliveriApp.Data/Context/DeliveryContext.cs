@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using DeliveriApp.Domein.Entities;
 
 namespace DeliveriApp.Data.Context
@@ -8,10 +7,9 @@ namespace DeliveriApp.Data.Context
     {
         public DeliveryContext(DbContextOptions<DeliveryContext> options) : base(options) { }
 
-        public DbSet<City> Citys => Set<City>();
-        public DbSet<Order> Orders => Set<Order>();
-        public DbSet<Region> Regions => Set<Region>();
-        public DbSet<RegionOrder> RegionOrders => Set<RegionOrder>();
+        public DbSet<City> Citys { get; set; }
+        public DbSet<Order> Orders{ get; set; }
+        public DbSet<Region> Regions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

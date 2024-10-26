@@ -11,7 +11,7 @@ namespace DeliveriApp.Api.Moduls
             services.AddDbContext<DeliveryContext>(options =>
             {
                 var conectionString = configuration
-                .GetConnectionString("EfCoreShopDataBase");
+                .GetConnectionString("DeliveryDatabase");
 
                 options.UseSqlite(conectionString);
             });
