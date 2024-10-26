@@ -7,7 +7,8 @@ namespace DeliveriApp.Api.Moduls
         public static IServiceCollection AddScrutor(this IServiceCollection services)
         {
             services.Scan(scan => scan
-            .FromAssembliesOf(typeof(IRequestHendler<>))
+            /*.FromAssembliesOf(typeof(IRequestHendler<>))*/
+            .FromApplicationDependencies()
             .AddClasses(classes => classes.AssignableTo(typeof(IRequestHendler<>)))
                 .AsImplementedInterfaces()
                 .WithTransientLifetime()

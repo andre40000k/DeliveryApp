@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\DeliveriApp.Application\DeliveriApp.Application.csproj" />
+    <ProjectReference Include="..\DeliveriApp.Data\DeliveriApp.Data.csproj" />
+  </ItemGroup>
+
 </Project>
