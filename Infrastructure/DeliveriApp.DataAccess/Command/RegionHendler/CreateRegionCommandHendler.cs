@@ -2,7 +2,7 @@
 using DeliveriApp.Application.UpsertModels.Commands;
 using DeliveriApp.Data.Context;
 
-namespace DeliveriApp.DataAccess.CommandHendler.Region
+namespace DeliveriApp.DataAccess.Command.RegionHendler
 {
     public class CreateRegionCommandHendler : IRequestHendler<UpsertRegionCommand>
     {

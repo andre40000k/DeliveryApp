@@ -8,7 +8,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\DeliveriApp.Application\DeliveriApp.Application.csproj" />
+    <ProjectReference Include="..\..\Core\DeliveriApp.Domein\DeliveriApp.Domein.csproj" />
     <ProjectReference Include="..\DeliveriApp.Data\DeliveriApp.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Command\Common\" />
   </ItemGroup>
 
 </Project>

@@ -17,7 +17,7 @@ namespace DeliveriApp.Data.Configuration
             builder.HasOne(r=>r.Region)
                 .WithMany(r => r.Orders)
                 .HasForeignKey(r=>r.RegionId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.ToTable(nameof(Order));
         }

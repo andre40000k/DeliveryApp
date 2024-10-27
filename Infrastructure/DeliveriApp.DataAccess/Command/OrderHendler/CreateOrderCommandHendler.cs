@@ -3,7 +3,7 @@ using DeliveriApp.Application.UpsertModels.Commands;
 using DeliveriApp.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace DeliveriApp.DataAccess.CommandHendler.Order
+namespace DeliveriApp.DataAccess.Command.OrderHendler
 {
     public class CreateOrderCommandHendler : IRequestHendler<UpsertOrderCommand>
     {

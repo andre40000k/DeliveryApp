@@ -20,5 +20,17 @@ namespace DeliveriApp.Api.Controllers
 
             return Ok(200);
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> RemoveCity([FromServices] IRequestHendler<DelIfExistsIdCommand> requestHendler,
+            [FromBody] RequestIdCommand requestIdCommand)
+        {
+            await requestHendler.HendlerAsync(new DelIfExistsIdCommand
+            {
+                Id = requestIdCommand.Id
+            });
+
+            return Ok(200);
+        }
     }
 }

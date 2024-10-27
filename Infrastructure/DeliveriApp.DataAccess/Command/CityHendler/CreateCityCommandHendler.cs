@@ -2,7 +2,7 @@
 using DeliveriApp.Application.UpsertModels.Commands;
 using DeliveriApp.Data.Context;
 
-namespace DeliveriApp.DataAccess.CommandHendler.City
+namespace DeliveriApp.DataAccess.Command.CityHendler
 {
     public class CreateCityCommandHendler : IRequestHendler<UpsertCityCommand>
     {
