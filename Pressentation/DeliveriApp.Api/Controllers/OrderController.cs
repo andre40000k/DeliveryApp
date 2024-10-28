@@ -9,7 +9,7 @@ namespace DeliveriApp.Api.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
-        [HttpPost]
+        [HttpPost("AddOrder")]
         public async Task<IActionResult> AddOrder([FromServices] IRequestHendler<UpsertOrderCommand> requestHendler,
             [FromBody] RequestOrderCommand orderCommand)
         {
@@ -17,7 +17,22 @@ namespace DeliveriApp.Api.Controllers
             {
                 RegionId = orderCommand.RegionId,
                 OrderWeight = orderCommand.OrderWeight,
+                TimeOrder = orderCommand.TimeOrder,
+                Distance = orderCommand.Distance,
                 DeliveriTime = orderCommand.DeliveriTime
+            });
+
+            return Ok(200);
+        }
+
+        [HttpPost("AddRangeOrders")]
+        public async Task<IActionResult> AddRangeOrders([FromServices] IRequestHendler<UpsertManyOrdersCommand> requestHendler,
+            [FromBody] RequestManyOrdersCommand orderCommand)
+        {
+            await requestHendler.HendlerAsync(new UpsertManyOrdersCommand
+            {
+                Id = orderCommand.Id,
+                countOrders = orderCommand.countOrders
             });
 
             return Ok(200);

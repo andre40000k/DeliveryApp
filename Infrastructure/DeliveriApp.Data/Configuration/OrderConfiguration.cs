@@ -11,6 +11,8 @@ namespace DeliveriApp.Data.Configuration
             builder.HasKey(k => k.Id);
             builder.Property(p => p.Id).ValueGeneratedOnAdd();
             builder.Property(p=>p.OrderId).IsRequired();
+            builder.Property(p => p.TimeOrder).IsRequired();
+            builder.Property(p => p.OrderWeight).IsRequired();
             builder.Property(p=>p.OrderWeight).IsRequired();
             builder.Property(p=>p.DeliveriTime).IsRequired();
 

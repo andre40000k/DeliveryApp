@@ -7,6 +7,8 @@ namespace DeliveriApp.Application.UpsertModels.Commands
         public Guid RegionId { get; set; }
         public int OrderId { get; set; }
         public double OrderWeight { get; set; }
+        public DateTime TimeOrder { get; set; }
+        public int Distance { get; set; }
         public DateTime DeliveriTime { get; set; }
 
         public Order UpsertOrder()
@@ -16,6 +18,8 @@ namespace DeliveriApp.Application.UpsertModels.Commands
                 RegionId = RegionId,
                 OrderId = OrderId,
                 OrderWeight = OrderWeight,
+                TimeOrder = TimeOrder,
+                Distance = Distance,
                 DeliveriTime = DeliveriTime
             };
         }

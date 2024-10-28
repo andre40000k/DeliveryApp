@@ -7,6 +7,8 @@
 
         public int OrderId { get; set; }
         public double OrderWeight { get; set; }
+        public DateTime TimeOrder { get; set; }
+        public int Distance { get; set; }
         public DateTime DeliveriTime { get; set; }
     }
 }
