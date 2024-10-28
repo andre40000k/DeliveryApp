@@ -1,6 +1,7 @@
 ﻿using DeliveriApp.Application.Services;
 using DeliveriApp.Application.UpsertModels.Commands;
 using DeliveriApp.Data.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace DeliveriApp.DataAccess.Command.RegionHendler
 {
@@ -14,6 +15,16 @@ namespace DeliveriApp.DataAccess.Command.RegionHendler
         }
         public async Task HendlerAsync(UpsertRegionCommand request, CancellationToken cancellationToken = default)
         {
+            var region = await _deliveryContext.Regions
+                .Where(p => p.RegionName == request.RegionName)
+                .FirstOrDefaultAsync(cancellationToken);
+
+            if (region != null)
+            {
+                throw new Exception();
+            }
+                
+
             await _deliveryContext.AddAsync(request.UpsertRegion(), cancellationToken);
             await _deliveryContext.SaveChangesAsync(cancellationToken);
         }

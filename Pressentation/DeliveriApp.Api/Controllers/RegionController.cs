@@ -28,21 +28,20 @@ namespace DeliveriApp.Api.Controllers
         public async Task<IActionResult> AddRengeRegion([FromServices] IRequestHendler<UpsertRegionCommand> regionCommand,
             int countRegion, Guid CityId)
         {
-            if(countRegion < 12) 
-            {
-                return BadRequest(404);
-            }
-
+            int maxRegionInOneCircke = 6;
             int baseWidthRegion = 2000;
             int currentRegion = 1;
-            int countOfCircle = countRegion / 6;
+            int countOfCircle = (int)Math.Ceiling((double)countRegion / maxRegionInOneCircke);
 
-            for (int i = 1; i < countOfCircle + 1; ++i)
+            for (int i = 0; i < countOfCircle; ++i)
             {
-                int maxDistance = i * baseWidthRegion;
+                int maxDistance = (i + 1) * baseWidthRegion;
                 int minDistance = maxDistance - baseWidthRegion + 1;
+                int leftRegion = Math.Abs(countRegion - i * maxRegionInOneCircke);
 
-                for (int j = 0; j < 6; j++)
+                int countRegionInCircle = leftRegion > maxRegionInOneCircke ? maxRegionInOneCircke : leftRegion;
+
+                for (int j = 0; j < countRegionInCircle; j++)
                 {                    
                     await regionCommand.HendlerAsync(new UpsertRegionCommand
                     {
