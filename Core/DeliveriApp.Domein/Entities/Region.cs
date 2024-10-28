@@ -10,6 +10,7 @@
         public int MaxDistanceFromCafe { get; set; }
 
         public IEnumerable<Order> Orders { get; set; }
+        public IEnumerable<FiltrationOrder> SortedOrders { get; set; }
 
     }
 }

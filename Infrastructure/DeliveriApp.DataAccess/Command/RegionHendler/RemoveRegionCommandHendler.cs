@@ -16,7 +16,7 @@ namespace DeliveriApp.DataAccess.Command.RegionHendler
         }
         public async Task HendlerAsync(DelIfExistsIdCommand request, CancellationToken cancellationToken = default)
         {
-            var region = request.DelIfExistsCommand<Region>();
+            var region = request.GetByIdCommand<Region>();
 
             try
             {

@@ -1,6 +1,6 @@
 ﻿namespace DeliveriApp.Application.Contract.Requests
 {
-    public class RequestCityCommand
+    public class RequestCity
     {
         public string CityName { get; set; }
     }

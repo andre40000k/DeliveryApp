@@ -1,18 +1,6 @@
-﻿using DeliveriApp.Domein;
-using DeliveriApp.Domein.Interfaces;
+﻿using DeliveriApp.Application.UpsertModels.Common;
 
 namespace DeliveriApp.Application.UpsertModels.Commands
 {
-    public class DelIfExistsIdCommand : BaseProperties
-    {
-        public TEntity DelIfExistsCommand<TEntity>() where TEntity : class, IBaseProperties, new()
-        {
-            return new TEntity
-            {
-                Id = Id
-            };
-        }
-
-
-    }
+    public class DelIfExistsIdCommand : WorkWithId {}
 }

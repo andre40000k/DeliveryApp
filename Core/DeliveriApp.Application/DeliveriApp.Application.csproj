@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Contract\Respons\" />
-    <Folder Include="UpsertModels\Queries\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\Infrastructure\DeliveriApp.Data\DeliveriApp.Data.csproj" />
   </ItemGroup>
 

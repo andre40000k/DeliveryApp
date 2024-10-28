@@ -11,7 +11,7 @@ namespace DeliveriApp.Api.Controllers
     {
         [HttpPost]
         public async Task<IActionResult> AddCity([FromServices] IRequestHendler<UpsertCityCommand> requestHendler,
-            [FromBody] RequestCityCommand requesrCityCommand)
+            [FromBody] RequestCity requesrCityCommand)
         {
             await requestHendler.HendlerAsync(new UpsertCityCommand
             {
@@ -23,7 +23,7 @@ namespace DeliveriApp.Api.Controllers
 
         [HttpDelete]
         public async Task<IActionResult> RemoveCity([FromServices] IRequestHendler<DelIfExistsIdCommand> requestHendler,
-            [FromBody] RequestIdCommand requestIdCommand)
+            [FromBody] RequestId requestIdCommand)
         {
             await requestHendler.HendlerAsync(new DelIfExistsIdCommand
             {

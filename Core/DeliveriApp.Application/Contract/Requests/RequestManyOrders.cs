@@ -2,7 +2,8 @@
 
 namespace DeliveriApp.Application.Contract.Requests
 {
-    public class RequestIdCommand : BaseProperties
+    public class RequestManyOrders : BaseProperties
     {
+        public int countOrders { get; set; }
     }
 }

@@ -28,7 +28,7 @@ namespace DeliveriApp.DataAccess.Command.OrderHendler
 
             Random random = new Random();
 
-            int averageSpeed = 6;
+            int averageSpeed = 3;
 
             for (int i = 0; i < request.countOrders; i++)
             {
@@ -40,7 +40,7 @@ namespace DeliveriApp.DataAccess.Command.OrderHendler
                 {
                     RegionId = region.Id,
                     OrderWeight = random.Next(1, 200),
-                    TimeOrder = currentTime,
+                    TimeOrder = currentTime.AddMinutes(random.Next(1,70)),
                     Distance = distance,
                     DeliveriTime = currentTime.AddSeconds(distance / averageSpeed),
                 }, cancellationToken);

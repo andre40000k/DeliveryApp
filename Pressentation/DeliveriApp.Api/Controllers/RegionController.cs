@@ -11,7 +11,7 @@ namespace DeliveriApp.Api.Controllers
     {
         [HttpPost("AddRegion")]
         public async Task<IActionResult> AddRegion([FromServices] IRequestHendler<UpsertRegionCommand> regionCommand,
-            [FromBody] RequestRegionCommand requesrRegionCommand)
+            [FromBody] RequestRegion requesrRegionCommand)
         {
             await regionCommand.HendlerAsync(new UpsertRegionCommand
             {
@@ -60,7 +60,7 @@ namespace DeliveriApp.Api.Controllers
 
         [HttpDelete]
         public async Task<IActionResult> RemoveRegion([FromServices] IRequestHendler<DelIfExistsIdCommand> requestHendler,
-           [FromBody] RequestIdCommand requestIdCommand)
+           [FromBody] RequestId requestIdCommand)
         {
             await requestHendler.HendlerAsync(new DelIfExistsIdCommand
             {

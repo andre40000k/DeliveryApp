@@ -17,7 +17,7 @@ namespace DeliveriApp.DataAccess.Command.CityHendler
 
         public async Task HendlerAsync(DelIfExistsIdCommand request, CancellationToken cancellationToken = default)
         {
-            City city = request.DelIfExistsCommand<City>();
+            City city = request.GetByIdCommand<City>();
 
             try
             {

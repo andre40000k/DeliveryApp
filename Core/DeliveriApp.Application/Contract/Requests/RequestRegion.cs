@@ -1,6 +1,6 @@
 ﻿namespace DeliveriApp.Application.Contract.Requests
 {
-    public class RequestRegionCommand
+    public class RequestRegion
     {
         public Guid CityId { get; set; }
         public string RegionName { get; set; }
