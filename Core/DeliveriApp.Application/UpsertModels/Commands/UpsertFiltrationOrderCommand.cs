@@ -8,7 +8,8 @@ namespace DeliveriApp.Application.UpsertModels.Commands
 
         public List<FiltrationOrder> UpsertSortedOrder()
         {
-            List<FiltrationOrder > sortedOrders = new();
+            List<FiltrationOrder> sortedOrders = new ();
+
             foreach (var order in Orders)
             {
                 sortedOrders.Add(
@@ -19,7 +20,9 @@ namespace DeliveriApp.Application.UpsertModels.Commands
                         OrderWeight = order.OrderWeight,
                         TimeOrder = order.TimeOrder,
                         Distance = order.Distance,
-                        DeliveriTime = order.DeliveriTime
+                        DeliveriTime = order.DeliveriTime,
+                        TimeDelivery = order.TimeDelivery,
+                        
                     });
             }
 

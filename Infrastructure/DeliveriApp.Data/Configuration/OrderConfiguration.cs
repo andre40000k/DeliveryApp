@@ -15,6 +15,7 @@ namespace DeliveriApp.Data.Configuration
             builder.Property(p => p.OrderWeight).IsRequired();
             builder.Property(p=>p.OrderWeight).IsRequired();
             builder.Property(p=>p.DeliveriTime).IsRequired();
+            builder.Property(p => p.TimeDelivery).IsRequired();
 
             builder.HasOne(r=>r.Region)
                 .WithMany(r => r.Orders)

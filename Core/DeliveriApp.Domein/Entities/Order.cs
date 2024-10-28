@@ -10,5 +10,6 @@
         public DateTime TimeOrder { get; set; }
         public int Distance { get; set; }
         public DateTime DeliveriTime { get; set; }
+        public string TimeDelivery { get; set;}
     }
 }

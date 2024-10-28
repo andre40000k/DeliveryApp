@@ -37,6 +37,7 @@ namespace DeliveriApp.DataAccess.Query
                  .Where(order => order.RegionId == request.Id &&
                                  order.TimeOrder >= firstOrderTime &&
                                  order.TimeOrder <= endTime)
+                 .OrderBy(time => time.DeliveriTime)
                  .ToListAsync();
 
             await _requestHendler.HendlerAsync(new UpsertFiltrationOrderCommand

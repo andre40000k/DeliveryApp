@@ -20,7 +20,8 @@ namespace DeliveriApp.Application.UpsertModels.Commands
                 OrderWeight = OrderWeight,
                 TimeOrder = TimeOrder,
                 Distance = Distance,
-                DeliveriTime = DeliveriTime
+                DeliveriTime = DeliveriTime,
+                TimeDelivery = DeliveriTime.ToString("yyyy-MM-dd HH:mm:ss")
             };
         }
     }

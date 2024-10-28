@@ -15,7 +15,8 @@ namespace DeliveriApp.DataAccess.Command.FiltrationOrderHendler
 
         public async Task HendlerAsync(UpsertFiltrationOrderCommand request, CancellationToken cancellationToken = default)
         {
-            await _deliveryContext.AddRangeAsync(request.UpsertSortedOrder(), cancellationToken);
+            var sortedList = request.UpsertSortedOrder().OrderBy(o => o.DeliveriTime).ToList();
+            await _deliveryContext.AddRangeAsync(sortedList, cancellationToken);
             await _deliveryContext.SaveChangesAsync(cancellationToken);
         }
     }
