@@ -13,6 +13,8 @@ builder.Services.AddConectDb(builder.Configuration);
 
 builder.Services.AddScrutor();
 
+builder.Host.AddLog();
+
 
 var app = builder.Build();
 

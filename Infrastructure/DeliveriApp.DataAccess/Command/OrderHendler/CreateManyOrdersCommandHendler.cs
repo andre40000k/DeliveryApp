@@ -2,6 +2,7 @@
 using DeliveriApp.Application.UpsertModels.Commands;
 using DeliveriApp.Data.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System.Data;
 
 namespace DeliveriApp.DataAccess.Command.OrderHendler
@@ -10,19 +11,24 @@ namespace DeliveriApp.DataAccess.Command.OrderHendler
     {
         private readonly DeliveryContext _deliveryContext;
         private readonly IRequestHendler<UpsertOrderCommand> _createOrderCommandHendler;
+        private readonly ILogger<CreateManyOrdersCommandHendler> _logger;
 
         public CreateManyOrdersCommandHendler(DeliveryContext deliveryContext,
-            IRequestHendler<UpsertOrderCommand> createOrderCommandHendler)
+            IRequestHendler<UpsertOrderCommand> createOrderCommandHendler,
+            ILogger<CreateManyOrdersCommandHendler> logger)
         {
             _deliveryContext = deliveryContext;
             _createOrderCommandHendler = createOrderCommandHendler;
+            _logger = logger;
         }
 
         public async Task HendlerAsync(UpsertManyOrdersCommand request, CancellationToken cancellationToken = default)
         {
+
             var regions = await _deliveryContext.Regions
                 .Where(p => p.CityId == request.Id)
-                .ToListAsync(cancellationToken); 
+                .ToListAsync(cancellationToken);
+            _logger.LogInformation("Has gotten list of region in rhe city");
 
             var lenghtListOfRegions = regions.Count();
 
@@ -44,6 +50,8 @@ namespace DeliveriApp.DataAccess.Command.OrderHendler
                     Distance = distance,
                     DeliveriTime = currentTime.AddSeconds(distance / averageSpeed),
                 }, cancellationToken);
+
+                _logger.LogInformation("Has crated the order {i}", i);
             }
         }
     }

@@ -4,6 +4,7 @@ using DeliveriApp.Application.UpsertModels.Commands;
 using DeliveriApp.Application.UpsertModels.Queries;
 using DeliveriApp.Data.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace DeliveriApp.DataAccess.Query.FiltrationOrderHendler
 {
@@ -11,11 +12,14 @@ namespace DeliveriApp.DataAccess.Query.FiltrationOrderHendler
     {
         private readonly DeliveryContext _deliveryContext;
         private readonly IRequestHendler<UpsertFiltrationOrderCommand> _requestHendler;
+        private readonly ILogger<GetOrderByTimeQuery> _logger;
         public GetOrderByTimeQuery(DeliveryContext deliveryContext,
-            IRequestHendler<UpsertFiltrationOrderCommand> requestHendler)
+            IRequestHendler<UpsertFiltrationOrderCommand> requestHendler,
+            ILogger<GetOrderByTimeQuery> logger)
         {
             _deliveryContext = deliveryContext;
             _requestHendler = requestHendler;
+            _logger = logger;
         }
 
         public async Task<ResponsFirstThityMinutesOrders> HendlerAsync(GetByIdRegionQuery request, CancellationToken cancellationToken = default)
@@ -26,9 +30,12 @@ namespace DeliveriApp.DataAccess.Query.FiltrationOrderHendler
                 .Select(order => (DateTime?)order.TimeOrder)
                 .FirstOrDefaultAsync(cancellationToken);
 
+            _logger.LogInformation("Has been got the time of first order");
+
             if (firstOrderTime == null)
             {
-                return new ResponsFirstThityMinutesOrders();
+                _logger.LogError("No orders in bd");
+                throw new Exception();                
             }
 
             DateTime endTime = firstOrderTime.Value.AddMinutes(30);
@@ -47,6 +54,7 @@ namespace DeliveriApp.DataAccess.Query.FiltrationOrderHendler
                  .OrderBy(time => time.DeliveriTime)
                  .ToListAsync();
 
+            _logger.LogInformation("Has been got orders for delivery to a specific area of the city within half an hour after the time of the first order.");
 
             await _requestHendler.HendlerAsync(new UpsertFiltrationOrderCommand
             {

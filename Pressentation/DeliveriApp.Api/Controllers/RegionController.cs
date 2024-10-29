@@ -7,27 +7,48 @@ namespace DeliveriApp.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RegionController : ControllerBase
+    public class RegionController : CommonController<RegionController>
     {
+        public RegionController(ILogger<RegionController> logger) : base(logger) { }
+
         [HttpPost("AddRegion")]
         public async Task<IActionResult> AddRegion([FromServices] IRequestHendler<UpsertRegionCommand> regionCommand,
-            [FromBody] RequestRegion requesrRegionCommand)
+            [FromBody] RequestRegion requestRegionCommand)
         {
-            await regionCommand.HendlerAsync(new UpsertRegionCommand
-            {
-                CityId = requesrRegionCommand.CityId,
-                RegionName = requesrRegionCommand.RegionName,
-                MinDistanceFromCafe = requesrRegionCommand.MinDistanceFromCafe,
-                MaxDistanceFromCafe = requesrRegionCommand.MaxDistanceFromCafe
-            });
+            Logger.LogInformation("Add region with name {RegionName} ", requestRegionCommand.RegionName);
 
-           return Ok(200);
+            try
+            {
+                await regionCommand.HendlerAsync(new UpsertRegionCommand
+                {
+                    CityId = requestRegionCommand.CityId,
+                    RegionName = requestRegionCommand.RegionName,
+                    MinDistanceFromCafe = requestRegionCommand.MinDistanceFromCafe,
+                    MaxDistanceFromCafe = requestRegionCommand.MaxDistanceFromCafe
+                });
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex, "Has been gotten error during crated region. Error: {Message}", requestRegionCommand);
+            }
+
+            Logger.LogInformation("Has been add region with name {RegionName} ", requestRegionCommand.RegionName);
+
+            return Ok(200);
         }
 
         [HttpPost("AddRengeRegion")]
         public async Task<IActionResult> AddRengeRegion([FromServices] IRequestHendler<UpsertRegionCommand> regionCommand,
             int countRegion, Guid CityId)
         {
+            Logger.LogInformation("Craeat {countRegion} regions", countRegion);
+
+            if (countRegion < 1)
+            {
+                Logger.LogWarning("Has been entered {countRegion} this count of regions less then 1", countRegion);
+                return BadRequest("404");
+            }
+
             int maxRegionInOneCircke = 6;
             int baseWidthRegion = 2000;
             int currentRegion = 1;
@@ -53,8 +74,8 @@ namespace DeliveriApp.Api.Controllers
                     ++currentRegion;
                 }    
             }
-            
 
+            Logger.LogInformation("Has been craeated {countRegion} regions", countRegion);
             return Ok(200);
         }
 
@@ -62,10 +83,21 @@ namespace DeliveriApp.Api.Controllers
         public async Task<IActionResult> RemoveRegion([FromServices] IRequestHendler<DelIfExistsIdCommand> requestHendler,
            [FromBody] RequestId requestIdCommand)
         {
-            await requestHendler.HendlerAsync(new DelIfExistsIdCommand
+            Logger.LogInformation("Remove the region by id {Id}", requestIdCommand.Id);
+
+            try
             {
-                Id = requestIdCommand.Id
-            });
+                await requestHendler.HendlerAsync(new DelIfExistsIdCommand
+                {
+                    Id = requestIdCommand.Id
+                });
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex, "Has been not delited region by Id. Error: {Message}", requestIdCommand.Id);
+            }
+
+            Logger.LogInformation("Has been removed the region by id {Id}", requestIdCommand.Id);
 
             return Ok(200);
         }

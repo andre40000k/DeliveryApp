@@ -3,6 +3,7 @@ using DeliveriApp.Application.Services;
 using DeliveriApp.Application.UpsertModels.Queries;
 using DeliveriApp.Data.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace DeliveriApp.DataAccess.Query.FiltrationOrderHendler
 {
@@ -10,12 +11,15 @@ namespace DeliveriApp.DataAccess.Query.FiltrationOrderHendler
     {
         private readonly DeliveryContext _deliveryContext;
         private readonly IRequestHendler<GetByIdRegionQuery, ResponsFirstThityMinutesOrders> _query;
+        private readonly ILogger<GetOrderByRegionTimeQuery> _logger;
 
         public GetOrderByRegionTimeQuery(DeliveryContext deliveryContext,
-            IRequestHendler<GetByIdRegionQuery, ResponsFirstThityMinutesOrders> query)
+            IRequestHendler<GetByIdRegionQuery, ResponsFirstThityMinutesOrders> query,
+            ILogger<GetOrderByRegionTimeQuery> logger)
         {
             _deliveryContext = deliveryContext;
             _query = query;
+            _logger = logger;
         }
 
         public async Task<ResponsFirstThityMinutesOrders> HendlerAsync(CancellationToken cancellationToken = default)
@@ -30,10 +34,14 @@ namespace DeliveriApp.DataAccess.Query.FiltrationOrderHendler
                 .OrderByDescending(region => region.OrderCount)
                 .FirstOrDefaultAsync();
 
-            var filtredOrders = await _query.HendlerAsync(new GetByIdRegionQuery 
-            { 
+            _logger.LogInformation("Has been got the region id {Id} with big count of orders", regionId);
+
+            var filtredOrders = await _query.HendlerAsync(new GetByIdRegionQuery
+            {
                 Id = regionId?.RegionId ?? throw new Exception()
             }, cancellationToken);
+
+            _logger.LogInformation("Has been got the list of orders by {RegionId}", regionId);
 
             return filtredOrders;
         }
