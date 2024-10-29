@@ -27,7 +27,7 @@ namespace DeliveriApp.DataAccess.Command.FiltrationOrderHendler
             
             var sortedList = request.UpsertSortedOrder().OrderBy(o => o.DeliveriTime).ToList();
             await _deliveryContext.AddRangeAsync(sortedList, cancellationToken);
-            _logger.LogInformation("АiltredOrders has added to bd filtredOrders");
+            _logger.LogInformation("Аll filtred orders has been added to bd filtredOrders");
             await _deliveryContext.SaveChangesAsync(cancellationToken);
             _logger.LogInformation("Save changes in bd for filtred orders");
         }
