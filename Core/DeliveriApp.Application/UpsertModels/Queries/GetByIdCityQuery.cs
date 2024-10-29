@@ -2,5 +2,5 @@
 
 namespace DeliveriApp.Application.UpsertModels.Queries
 {
-    public class GetByIdQuery : WorkWithId {}
+    public class GetByIdCityQuery : WorkWithId {}
 }

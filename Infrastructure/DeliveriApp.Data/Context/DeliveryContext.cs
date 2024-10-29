@@ -9,7 +9,7 @@ namespace DeliveriApp.Data.Context
 
         public DbSet<City> Citys { get; set; }
         public DbSet<Order> Orders{ get; set; }
-        public DbSet<FiltrationOrder> SortedOrders { get; set; }
+        public DbSet<FiltrationOrder> FiltrationOrders { get; set; }
         public DbSet<Region> Regions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

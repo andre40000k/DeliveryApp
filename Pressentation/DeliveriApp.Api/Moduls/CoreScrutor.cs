@@ -9,6 +9,9 @@ namespace DeliveriApp.Api.Moduls
             services.Scan(scan => scan
             /*.FromAssembliesOf(typeof(IRequestHendler<>))*/
             .FromApplicationDependencies()
+            .AddClasses(classes => classes.AssignableTo(typeof(IRsponsHendler<>)))
+                .AsImplementedInterfaces()
+                .WithTransientLifetime()
             .AddClasses(classes => classes.AssignableTo(typeof(IRequestHendler<>)))
                 .AsImplementedInterfaces()
                 .WithTransientLifetime()

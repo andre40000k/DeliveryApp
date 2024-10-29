@@ -12,10 +12,21 @@ namespace DeliveriApp.Api.Controllers
     public class OrderController : ControllerBase
     {
         [HttpGet("FiltrationOrders")]
-        public async Task<IActionResult> GetFirstThirtyMinutesOrders(Guid requestId, 
-            [FromServices] IRequestHendler<GetByIdQuery, ResponsFirstThityMinutesOrders> response)
+        public async Task<IActionResult> GetFiltredOrders([FromServices] IRsponsHendler<ResponsFirstThityMinutesOrders> response)
         {
-            var orders = await response.HendlerAsync(new GetByIdQuery
+            var orders = await response.HendlerAsync();
+
+            if (orders == null)
+                return NotFound();
+
+            return Ok(orders);
+        }
+
+        [HttpGet("FiltrationOrdersUseRegionId")]
+        public async Task<IActionResult> GetFiltredOrdersByRegionId(Guid requestId, 
+            [FromServices] IRequestHendler<GetByIdRegionQuery, ResponsFirstThityMinutesOrders> response)
+        {
+            var orders = await response.HendlerAsync(new GetByIdRegionQuery
             {
                 Id = requestId
             });
