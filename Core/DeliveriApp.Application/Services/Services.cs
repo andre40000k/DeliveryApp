@@ -1,6 +1,6 @@
 ﻿namespace DeliveriApp.Application.Services
 {
-    public interface IRsponsHendler<IRespons>
+    public interface IResponsHendler<IRespons>
     {
         Task<IRespons> HendlerAsync(CancellationToken cancellationToken = default);
     }

@@ -1,6 +1,8 @@
 ﻿using DeliveriApp.Application.Services;
 using DeliveriApp.Application.UpsertModels.Commands;
 using DeliveriApp.Data.Context;
+using DeliveriApp.Domein.Entities;
+using DeliveriApp.Domein.Interfaces.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -10,11 +12,14 @@ namespace DeliveriApp.DataAccess.Command.FiltrationOrderHendler
     {
         private readonly DeliveryContext _deliveryContext;
         private readonly ILogger<AddRangeSortedOrderCommandHendler> _logger;
+        private readonly ISetRepository _setRepository;
 
         public AddRangeSortedOrderCommandHendler(DeliveryContext deliveryContext, 
+            ISetRepository setRepository,
             ILogger<AddRangeSortedOrderCommandHendler> logger)
         {
             _deliveryContext = deliveryContext;
+            _setRepository = setRepository;
             _logger = logger;
         }
 
@@ -23,13 +28,9 @@ namespace DeliveriApp.DataAccess.Command.FiltrationOrderHendler
             
             await _deliveryContext.FiltrationOrders.ExecuteDeleteAsync();
             _logger.LogInformation("Remove all date from bd filtred orders");
-
             
             var sortedList = request.UpsertSortedOrder().OrderBy(o => o.DeliveriTime).ToList();
-            await _deliveryContext.AddRangeAsync(sortedList, cancellationToken);
-            _logger.LogInformation("Аll filtred orders has been added to bd filtredOrders");
-            await _deliveryContext.SaveChangesAsync(cancellationToken);
-            _logger.LogInformation("Save changes in bd for filtred orders");
+            await _setRepository.AddRangeEntitiesAsync(sortedList, cancellationToken);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using DeliveriApp.Application.Services;
 using DeliveriApp.Application.UpsertModels.Commands;
 using DeliveriApp.Data.Context;
+using DeliveriApp.Domein.Interfaces.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -9,12 +10,15 @@ namespace DeliveriApp.DataAccess.Command.RegionHendler
     public class CreateRegionCommandHendler : IRequestHendler<UpsertRegionCommand>
     {
         private readonly DeliveryContext _deliveryContext;
+        private readonly ISetRepository _setRepository;
         private readonly ILogger<CreateRegionCommandHendler> _logger;
 
         public CreateRegionCommandHendler(DeliveryContext deliveryContext,
+            ISetRepository setRepository,
             ILogger<CreateRegionCommandHendler> logger)
         {
             _deliveryContext = deliveryContext;
+            _setRepository = setRepository;
             _logger = logger;
         }
         public async Task HendlerAsync(UpsertRegionCommand request, CancellationToken cancellationToken = default)
@@ -31,10 +35,8 @@ namespace DeliveriApp.DataAccess.Command.RegionHendler
                 
             }
                 
-
-            await _deliveryContext.AddAsync(request.UpsertRegion(), cancellationToken);
+            await _setRepository.AddEntityAsync(request.UpsertRegion(), cancellationToken);
             _logger.LogInformation("The region has added to bd");
-            await _deliveryContext.SaveChangesAsync(cancellationToken);
             _logger.LogInformation("Save changes in bd for regions");
         }
     }

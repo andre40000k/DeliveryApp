@@ -21,8 +21,9 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Core\DeliveriApp.Application\DeliveriApp.Application.csproj" />
     <ProjectReference Include="..\..\Core\DeliveriApp.Domein\DeliveriApp.Domein.csproj" />
-    <ProjectReference Include="..\..\Infrastructure\DeliveriApp.DataAccess\DeliveriApp.DataAccess.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\DeliveriApp.DataAccess\DeliveriApp.Procesing.csproj" />
     <ProjectReference Include="..\..\Infrastructure\DeliveriApp.Data\DeliveriApp.Data.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\DeliveriApp.Repositories\DeliveriApp.Repositories.csproj" />
   </ItemGroup>
 
 </Project>

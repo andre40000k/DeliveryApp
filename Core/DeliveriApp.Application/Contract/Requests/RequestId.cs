@@ -2,5 +2,5 @@
 
 namespace DeliveriApp.Application.Contract.Requests
 {
-    public class RequestId : BaseProperties {}
+    public class RequestId : BaseEntity {}
 }

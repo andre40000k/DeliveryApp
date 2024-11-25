@@ -14,7 +14,7 @@ namespace DeliveriApp.Api.Controllers
         public OrderController(ILogger<OrderController> logger) : base(logger) { }
 
         [HttpGet("FiltrationOrders")]
-        public async Task<IActionResult> GetFiltredOrders([FromServices] IRsponsHendler<ResponsFirstThityMinutesOrders> response)
+        public async Task<IActionResult> GetFiltredOrders([FromServices] IResponsHendler<ResponsFirstThityMinutesOrders> response)
         {
             var orders = await response.HendlerAsync();
 

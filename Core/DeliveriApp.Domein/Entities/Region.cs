@@ -1,6 +1,6 @@
 ﻿namespace DeliveriApp.Domein.Entities
 {
-    public class Region : BaseProperties
+    public class Region : BaseEntity
     {
         public Guid CityId { get; set; }
         public City City { get; set; }

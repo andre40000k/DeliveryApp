@@ -2,7 +2,7 @@
 
 namespace DeliveriApp.Application.UpsertModels.Commands
 {
-    public class UpsertManyOrdersCommand : BaseProperties
+    public class UpsertManyOrdersCommand : BaseEntity
     {
         public int countOrders { get; set; }
     }

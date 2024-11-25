@@ -2,7 +2,7 @@
 
 namespace DeliveriApp.Domein
 {
-    public abstract class BaseProperties : IBaseProperties
+    public abstract class BaseEntity : IBaseProperties
     {
        public Guid Id { get; set; }
     }

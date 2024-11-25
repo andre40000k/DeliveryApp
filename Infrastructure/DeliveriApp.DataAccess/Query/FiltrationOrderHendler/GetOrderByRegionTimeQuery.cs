@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace DeliveriApp.DataAccess.Query.FiltrationOrderHendler
 {
-    public class GetOrderByRegionTimeQuery : IRsponsHendler<ResponsFirstThityMinutesOrders>
+    public class GetOrderByRegionTimeQuery : IResponsHendler<ResponsFirstThityMinutesOrders>
     {
         private readonly DeliveryContext _deliveryContext;
         private readonly IRequestHendler<GetByIdRegionQuery, ResponsFirstThityMinutesOrders> _query;
